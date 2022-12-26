@@ -1,0 +1,13 @@
+.hide{
+   display: none;
+}
+
+div img{
+    width: 300px;
+    margin: 50px;
+}
+
+button{
+    background-color:aqua;
+    margin: 50px;
+}
