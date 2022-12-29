@@ -31,7 +31,7 @@ let submitBtn = document.getElementById("submitBtn");
     window.addEventListener('load', ()=>{
         arr = JSON.parse(localStorage.getItem("toDoData")) || [];
         arr.forEach(element => {
-            todoList.innerHTML+=`<li>${element} <button>Delete</button></li>`
+            todoList.innerHTML+=`<li>${element}<button onclick="deleteFn('${element}', this)">Delete</button></li>`
         }); 
     })
     button.addEventListener("click", (e)=> {
@@ -42,8 +42,16 @@ let submitBtn = document.getElementById("submitBtn");
         // let child2=`<li>${inputdata.value}</li>`
         // todoList.appendChild(child);
         // todoList.appendChild(child)(child2);
-        todoList.innerHTML+=`<li>${inputdata.value}</li>`
+        todoList.innerHTML+=`<li>${inputdata.value}<button onclick="deleteFn('${inputdata.value}', this)">delete</button></li>`
         arr.push(inputdata.value)
         localStorage.setItem("toDoData", JSON.stringify(arr))
         inputdata.value="";     
     })
+
+    function deleteFn(todo, element) {
+        console.log(element)
+        let index = arr.indexOf(todo); // Index nikala perticular data ka
+        arr.splice(index,1); // Array se data remove kiya
+        element.parentElement.remove();  // Removed from UI
+        localStorage.setItem("toDoData", JSON.stringify(arr)); // Removed array ko local Storage pe save kiya
+    }
